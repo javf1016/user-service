@@ -28,6 +28,9 @@ public interface UserService {
      */
     StandardResponse findUserByMail(String email, HttpServletRequest request);
 
-    StandardResponse<User> findUserById(Integer Id, HttpServletRequest request);
+    /**
+     * Find a user by UserId
+     */
+    StandardResponse<User> getUser(Integer Id, HttpServletRequest request);
 
 }

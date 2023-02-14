@@ -65,14 +65,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public StandardResponse<User> findUserById(Integer id, HttpServletRequest request) {
-        Optional<User> optionalUser = userRepository.findById(id);
-        if (optionalUser.isPresent()) {
-            User user = optionalUser.get();
-            return new StandardResponse<>(HttpStatus.OK.value(), "User Found", null, null, user, null);
-        } else {
-            return new StandardResponse<>(HttpStatus.NOT_FOUND.value(), "\n" +
-                    "The user does not exist with the id: " + id, request.getRequestURI(), null, null, null);
+    public StandardResponse<User> getUser(Integer userId, HttpServletRequest request) {
+        Optional<User> user = userRepository.findById(userId);
+        if (!user.isPresent()) {
+            return new StandardResponse<>(HttpStatus.NOT_FOUND.value(), "The user with id " + userId + " does not exist", request.getRequestURI(), null, null, null);
         }
+        return new StandardResponse<>(HttpStatus.OK.value(), "User Found", request.getRequestURI(), null, user.get(), null);
     }
 }

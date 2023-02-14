@@ -53,6 +53,14 @@ public class UserController {
 		return userService.findUserByMail(email, request);
 	}
 
+	/**
+	 * Find a user by UserId
+	 */
+	@GetMapping("/{userId}")
+	public StandardResponse<User> getSingleUser(@PathVariable Integer userId, HttpServletRequest request) {
+		return userService.getUser(userId, request);
+	}
+
 	private boolean isValidEmail(String email) {
 		String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
 		Pattern pattern = Pattern.compile(emailRegex);
